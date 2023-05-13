@@ -13,6 +13,17 @@ impl<T: PartialOrd + std::fmt::Debug> LinkedList<T> {
         self.0 = Some((data, Box::new(LinkedList(prev_head))));
     }
 
+    pub fn pop_front(&mut self) -> Option<T> {
+        let head = self.0.take();
+        match head {
+            None => None,
+            Some((data, child)) => {
+                self.0 = child.0;
+                Some(data)
+            }
+        }
+    }
+
     pub fn push_back(&mut self, data: T) {
         match self.0 {
             None => self.push_front(data),

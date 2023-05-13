@@ -15,4 +15,7 @@ fn main() {
 
     ll.push_sorted(12);
     println!("sorted push 12     : {:?}", ll);
+
+    let data = ll.pop_front();
+    println!("{:?} popped in front: {:?}", data, ll);
 }

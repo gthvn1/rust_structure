@@ -1,5 +1,21 @@
+use rust_structures::binary_tree::*;
 use rust_structures::doubly_linked_list::*;
 use rust_structures::linked_list::*;
+
+fn try_binary_tree() {
+    let mut bt: BTree<i32> = BTree::new();
+
+    bt.add(4);
+    bt.add(32);
+    bt.add(12);
+    bt.add(3);
+    bt.add(67);
+    bt.add(9);
+    bt.add(1);
+    bt.add(45);
+
+    bt.print_lfirst(0);
+}
 
 fn try_doubly_linked_list() {
     let mut dbl = DbList::default();
@@ -31,6 +47,7 @@ fn try_linked_list() {
 }
 
 fn main() {
-    try_linked_list();
+    try_binary_tree();
     try_doubly_linked_list();
+    try_linked_list();
 }

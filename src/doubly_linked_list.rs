@@ -10,15 +10,20 @@ use std::rc::{Rc, Weak};
 #[derive(Debug)]
 pub struct DbList<T> {
     // todo
-    first: Option<Rc<RefCell<DbNode<T>>>>,
-    last: Option<Rc<RefCell<DbNode<T>>>>,
+    head: Option<Rc<RefCell<DbNode<T>>>>,
+    // if there is one element head and tail will point to the same location
+    // so we need to use a weak reference for one of them to be able to drop
+    // the element.
+    tail: Option<Weak<RefCell<DbNode<T>>>>,
 }
 
 #[derive(Debug)]
 pub struct DbNode<T> {
     data: T,
     next: Option<Rc<RefCell<DbNode<T>>>>,
-    prev: Option<Rc<RefCell<DbNode<T>>>>,
+    // Same than head & tail, we need to use a weak reference for one of the
+    // two.
+    prev: Option<Weak<RefCell<DbNode<T>>>>,
 }
 
 impl<T> Default for DbList<T> {

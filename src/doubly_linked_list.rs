@@ -28,20 +28,38 @@ pub struct DbNode<T> {
 
 impl<T> Default for DbList<T> {
     fn default() -> Self {
-        todo!()
+        Self {
+            head: None,
+            tail: None,
+        }
     }
 }
 
 impl<T> DbList<T> {
     pub fn push_front(&mut self, data: T) {
-        todo!();
-    }
-
-    pub fn pop_front(&mut self) -> Option<T> {
-        todo!();
-    }
-
-    pub fn push_back(&mut self, data: T) {
-        todo!();
+        match self.head.take() {
+            None => {
+                let new_node = Rc::new(RefCell::new(DbNode {
+                    data,
+                    next: None,
+                    prev: None,
+                }));
+                self.tail = Some(Rc::downgrade(&new_node));
+                self.head = Some(new_node);
+            }
+            Some(old_head) => {
+                let new_node = Rc::new(RefCell::new(DbNode {
+                    data,
+                    next: Some(old_head.clone()),
+                    prev: None,
+                }));
+                // Now we need to modify the former head.
+                // So add new_node as a previous weak reference.
+                let mut m = old_head.borrow_mut();
+                m.prev = Some(Rc::downgrade(&new_node));
+                // and we update the head to point to the new node
+                self.head = Some(new_node);
+            }
+        }
     }
 }

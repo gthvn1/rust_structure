@@ -62,4 +62,31 @@ impl<T> DbList<T> {
             }
         }
     }
+
+    pub fn push_back(&mut self, data: T) {
+        match self.tail.take() {
+            None => {
+                // It is the same as push front
+                let new_node = Rc::new(RefCell::new(DbNode {
+                    data,
+                    next: None,
+                    prev: None,
+                }));
+                self.tail = Some(Rc::downgrade(&new_node));
+                self.head = Some(new_node);
+            }
+            Some(old_tail) => {
+                let new_node = Rc::new(RefCell::new(DbNode {
+                    data,
+                    next: None,
+                    prev: Some(old_tail.clone()),
+                }));
+
+                let st = Weak::upgrade(&old_tail).unwrap();
+                let mut m = st.borrow_mut();
+                self.tail = Some(Rc::downgrade(&new_node));
+                m.next = Some(new_node);
+            }
+        }
+    }
 }

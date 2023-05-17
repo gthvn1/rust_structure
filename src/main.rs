@@ -15,6 +15,10 @@ fn try_binary_tree() {
     bt.add(45);
 
     bt.print_lfirst(0);
+
+    println!("Applying Right rotation");
+    bt.rrot();
+    bt.print_lfirst(0);
 }
 
 fn try_doubly_linked_list() {

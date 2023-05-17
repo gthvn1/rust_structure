@@ -15,6 +15,23 @@ impl<T> BNode<T> {
             right: BTree::new(),
         }
     }
+
+    fn right_rotation(mut self) -> Box<Self> {
+        let new_node = self.left.0.take();
+
+        match new_node {
+            None => return Box::new(self),
+            Some(mut node) => {
+                let old_left = node.right.0.take();
+                self.left = BTree(old_left);
+                self.left.update_height();
+
+                node.right = BTree(Some(Box::new(self)));
+                node.right.update_height();
+                node
+            }
+        }
+    }
 }
 
 #[derive(Debug)]
@@ -41,6 +58,12 @@ impl<T> BTree<T> {
     pub fn update_height(&mut self) {
         if let Some(node) = &mut self.0 {
             node.height = 1 + std::cmp::max(node.left.height(), node.right.height());
+        }
+    }
+
+    pub fn rrot(&mut self) {
+        if let Some(node) = self.0.take() {
+            self.0 = Some(node.right_rotation());
         }
     }
 }

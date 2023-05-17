@@ -3,7 +3,7 @@ use rust_structures::doubly_linked_list::*;
 use rust_structures::linked_list::*;
 
 fn try_binary_tree() {
-    let mut bt: BTree<i32> = BTree::new();
+    let mut bt: BTree<i32> = BTree::default();
 
     bt.add(4);
     bt.add(32);

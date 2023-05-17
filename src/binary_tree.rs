@@ -20,6 +20,12 @@ impl<T> BNode<T> {
 #[derive(Debug)]
 pub struct BTree<T>(Option<Box<BNode<T>>>);
 
+impl<T> Default for BTree<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<T> BTree<T> {
     pub fn new() -> Self {
         BTree(None)

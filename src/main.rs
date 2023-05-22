@@ -28,10 +28,32 @@ fn try_doubly_linked_list() {
     println!("== Doubly Linked List\n");
     let mut dbl = DbList::default();
 
-    dbl.push_head(30);
-    dbl.push_head(20);
-    dbl.push_head(10);
-    println!("{}", dbl.stringify())
+    let data = 30;
+    println!("push {} to front", data);
+    dbl.push_front(data);
+    println!("=> {}", dbl.stringify());
+
+    let data = 20;
+    println!("push {} to back", data);
+    dbl.push_back(data);
+    println!("=> {}", dbl.stringify());
+
+    let data = 40;
+    println!("push {} to front", data);
+    dbl.push_front(data);
+    println!("=> {}", dbl.stringify());
+
+    let data = dbl.pop_back();
+    println!("pop {:?} from the back", data);
+    println!("=> {}", dbl.stringify());
+
+    let data = dbl.pop_front();
+    println!("pop {:?} from the front", data);
+    println!("=> {}", dbl.stringify());
+
+    let data = dbl.pop_front();
+    println!("pop {:?} from the front", data);
+    println!("=> {}", dbl.stringify());
 }
 
 fn try_linked_list() {
@@ -59,6 +81,6 @@ fn try_linked_list() {
 
 fn main() {
     try_binary_tree();
-    try_doubly_linked_list();
     try_linked_list();
+    try_doubly_linked_list();
 }

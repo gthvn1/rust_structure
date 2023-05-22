@@ -14,7 +14,7 @@ impl<T: std::fmt::Display> Node<T> {
         match &self.next {
             None => format!("{}", self.data),
             Some(next) => {
-                format!("{} -> {}", self.data, next.as_ref().borrow().stringify())
+                format!("{} -> {}", self.data, next.borrow().stringify())
             }
         }
     }
@@ -68,7 +68,7 @@ impl<T: std::fmt::Display> DbList<T> {
     pub fn stringify(&self) -> String {
         match &self.head {
             None => String::from("List is empty"),
-            Some(node) => format!("HEAD: {}", node.as_ref().borrow().stringify()),
+            Some(node) => format!("HEAD: {}", node.borrow().stringify()),
         }
     }
 }

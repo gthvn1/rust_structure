@@ -20,7 +20,7 @@ impl<T> BNode<T> {
         let new_node = self.left.0.take();
 
         match new_node {
-            None => return Box::new(self),
+            None => Box::new(self),
             Some(mut node) => {
                 let old_left = node.right.0.take();
                 self.left = BTree(old_left);

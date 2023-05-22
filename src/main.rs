@@ -3,6 +3,8 @@ use rust_structures::doubly_linked_list::*;
 use rust_structures::linked_list::*;
 
 fn try_binary_tree() {
+    println!("\n================================================");
+    println!("== Binary tree\n ");
     let mut bt: BTree<i32> = BTree::default();
 
     bt.add(4);
@@ -22,15 +24,20 @@ fn try_binary_tree() {
 }
 
 fn try_doubly_linked_list() {
+    println!("\n================================================");
+    println!("== Doubly Linked List\n");
     let mut dbl = DbList::default();
 
-    dbl.push_front(30);
-    dbl.push_front(20);
-    dbl.push_front(10);
-    println!("{:?}", dbl)
+    dbl.push_head(30);
+    dbl.push_head(20);
+    dbl.push_head(10);
+    println!("{}", dbl.stringify())
 }
 
 fn try_linked_list() {
+    println!("\n================================================");
+    println!("== Linked List\n");
+
     let mut ll: LinkedList<i32> = LinkedList::default();
     println!("create linked list : {:?}", ll);
 
